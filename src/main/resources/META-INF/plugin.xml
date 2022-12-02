@@ -25,12 +25,12 @@
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-    <extensions defaultExtensionNs="com.intellij">
-
-    </extensions>
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+<!--        <psi.referenceContributor language="Lua" implementation="com.cppcxy.unity.UnityReferenceProvider"/>-->
+<!--    </extensions>-->
 
     <extensions defaultExtensionNs="com.tang.intellij.lua">
-        <luaTypeInfer implementation="com.cppcxy.emmyluaunity2.UnityTypeInfer"/>
-<!--        <luaShortNamesManager implementation="com.tang.intellij.lua.unity.ty.UnityShortNamesManager" id="unity"/>-->
+        <luaTypeInfer implementation="com.cppcxy.unity.UnityTypeInfer"/>
+        <luaShortNamesManager implementation="com.cppcxy.unity.extendApi.ExtendShortNameManager" id="unity"/>
     </extensions>
 </idea-plugin>

@@ -1,4 +1,4 @@
-package com.cppcxy.emmyluaunity2
+package com.cppcxy.unity
 
 import com.intellij.psi.PsiNamedElement
 import com.intellij.util.Processor

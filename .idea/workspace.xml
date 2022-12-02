@@ -58,6 +58,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -68,6 +69,13 @@
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.plugins/gradle-intellij-plugin/1.6.0/ca8a905bc17e09a0ce666e4da0c00b2ee2873d75/gradle-intellij-plugin-1.6.0-sources.jar!/org/jetbrains/intellij/IntelliJPluginExtension.kt" root0="SKIP_INSPECTION" />
     <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.plugins/gradle-intellij-plugin/1.6.0/ca8a905bc17e09a0ce666e4da0c00b2ee2873d75/gradle-intellij-plugin-1.6.0-sources.jar!/org/jetbrains/intellij/tasks/RunIdeBase.kt" root0="SKIP_INSPECTION" />
     <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/3745ad4d44f9356916f77fcbfbe4b2a6/transformed/unzipped-distribution/gradle-7.4.2/subprojects/base-services/src/main/java/org/gradle/internal/reflect/JavaMethod.java" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -161,4 +169,11 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="(psiElement as LuaCallExpr).expr" language="kotlin" custom="import java.util.concurrent.atomic.AtomicReference" />
+      </configuration>
+    </watches-manager>
+  </component>
 </project>
