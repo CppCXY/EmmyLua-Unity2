@@ -1,6 +1,8 @@
 package com.cppcxy.unity.extendApi
 
 import com.intellij.ide.util.PsiNavigationSupport
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiManager
@@ -46,6 +48,19 @@ class ExtendClassMember(
 
     override fun guessParentType(context: SearchContext): ITy {
         return parent.type
+    }
+
+    override fun canNavigateToSource(): Boolean = true
+
+    override fun navigate(requestFocus: Boolean) {
+        val loc = location.substring(8).split('#') // file:///
+        val path = loc[0]
+        val offset = loc[1].toInt()
+        val file = LocalFileSystem.getInstance().findFileByPath(path)
+        if (file != null) {
+            val navigate = PsiNavigationSupport.getInstance().createNavigatable(project, file, offset)
+            navigate.navigate(true)
+        }
     }
 
     override val visibility: Visibility
@@ -123,6 +138,19 @@ class ExtendClass(
         return methods[name]
     }
 
+    override fun canNavigateToSource(): Boolean = true
+
+    override fun navigate(requestFocus: Boolean) {
+        val loc = location.substring(8).split('#') // file:///
+        val path = loc[0]
+        val offset = loc[1].toInt()
+        val file = LocalFileSystem.getInstance().findFileByPath(path)
+        if (file != null) {
+            val navigate = PsiNavigationSupport.getInstance().createNavigatable(project, file, offset)
+            navigate.navigate(true)
+        }
+    }
+
     val isEnum: Boolean
         get() = attribute == "enum"
 
@@ -172,13 +200,6 @@ abstract class NsMember(
 
     fun findMember(name: String): LuaClassMember? {
         return members.firstOrNull { it.name == name }
-    }
-
-    override fun canNavigateToSource(): Boolean = true
-
-    override fun navigate(requestFocus: Boolean) {
-//        val file = virtualFile
-//        val navigate = PsiNavigationSupport.getInstance().createNavigatable(project, )
     }
 
     override val visibility: Visibility
