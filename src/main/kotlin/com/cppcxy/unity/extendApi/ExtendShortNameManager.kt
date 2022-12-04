@@ -1,6 +1,14 @@
 package com.cppcxy.unity.extendApi
+
+import com.cppcxy.unity.UnitySettings
 import com.google.gson.Gson
 import com.intellij.execution.configurations.GeneralCommandLine
+import com.intellij.execution.process.CapturingProcessAdapter
+import com.intellij.execution.process.OSProcessHandler
+import com.intellij.execution.process.ProcessEvent
+import com.intellij.openapi.progress.ProgressIndicator
+import com.intellij.openapi.progress.ProgressManager
+import com.intellij.openapi.progress.Task
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManager
 import com.intellij.openapi.project.ProjectManagerListener
@@ -12,9 +20,6 @@ import com.tang.intellij.lua.psi.search.LuaShortNamesManager
 import com.tang.intellij.lua.search.SearchContext
 import com.tang.intellij.lua.ty.ITyClass
 import java.io.File
-import com.intellij.execution.process.CapturingProcessAdapter
-import com.intellij.execution.process.OSProcessHandler
-import com.intellij.execution.process.ProcessEvent
 import java.nio.charset.StandardCharsets
 
 class ExtendShortNameManager : LuaShortNamesManager(), ProjectManagerListener {
@@ -32,30 +37,45 @@ class ExtendShortNameManager : LuaShortNamesManager(), ProjectManagerListener {
             val slnFiles = workspaceDir.listFiles { it ->
                 it.extension == "sln"
             }
-            if(slnFiles.isNotEmpty()){
+            if (slnFiles.isNotEmpty()) {
                 val slnFile = slnFiles.first()
-                val exePath = "C:\\Users\\zc\\Desktop\\github\\EmmyLua-Unity-LS\\unity\\bin\\Release\\net6.0\\unity.exe"
-                val commandLine = GeneralCommandLine()
-                    .withExePath(exePath)
-                    .withParameters(
-                        slnFile.path,
-                        "UnityEngine"
-                    )
-                val handler = OSProcessHandler(commandLine.withCharset(StandardCharsets.UTF_8))
-                handler.addProcessListener(object : CapturingProcessAdapter() {
-                    override fun processTerminated(event: ProcessEvent) {
-                        val exitCode: Int = event.exitCode
-                        if (exitCode == 0) {
-                            val out = output.stdout
-                            val params = Gson().fromJson(out, LuaReportApiParams::class.java)
-                            ExtendApiService.loadApi(project, params)
+                UnitySettings.resolveUnityLs {
+                    val commandLine = GeneralCommandLine()
+                        .withExePath(it)
+                        .withParameters(
+                            slnFile.path,
+                            UnitySettings.unityNs.joinToString(";")
+                        )
+
+                    ProgressManager.getInstance().run(object : Task.Backgroundable(project, "load unity api ...") {
+                        override fun run(indicator: ProgressIndicator) {
+                            indicator.fraction = 0.5 // halfway done
+                            indicator.text = "unity api loading..."
+
+                            val handler = OSProcessHandler(commandLine.withCharset(StandardCharsets.UTF_8))
+                            handler.addProcessListener(object : CapturingProcessAdapter() {
+                                override fun processTerminated(event: ProcessEvent) {
+                                    val exitCode: Int = event.exitCode
+                                    if (exitCode == 0) {
+                                        val out = output.stdout
+                                        val params = Gson().fromJson(out, LuaReportApiParams::class.java)
+                                        ExtendApiService.loadApi(project, params)
+                                        indicator.fraction = 1.0 // halfway done
+                                        indicator.text = "unity api loaded"
+                                    } else {
+                                        indicator.text = output.stderr
+                                        indicator.stop()
+                                    }
+                                }
+                            })
+                            handler.startNotify()
                         }
-                    }
-                })
-                handler.startNotify()
+                    })
+                }
             }
         }
     }
+
 
     private fun findClass(name: String): NsMember? {
         return ExtendApiService.getExtendClasses()[name]

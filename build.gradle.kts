@@ -1,11 +1,18 @@
+
+import de.undercouch.gradle.tasks.download.*
+
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
     id("org.jetbrains.intellij") version "1.9.0"
+    id("de.undercouch.download").version("5.3.0")
 }
 
 group = "com.cppcxy"
 version = "1.0.0"
+
+val emmyluaUnityLsVersion = "1.1.0"
+val emmyluaUnityLsProjectUrl = "https://github.com/CppCXY/EmmyLua-Unity-LS"
 
 repositories {
     mavenCentral()
@@ -23,6 +30,55 @@ intellij {
     type.set("IC") // Target IDE Platform
 
     plugins.set(listOf("com.tang:1.3.7.2-IDEA222"))
+}
+
+task("downloadLs", type = Download::class) {
+    src(arrayOf(
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-arm64.zip",
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-x64.zip",
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/linux-x64.zip",
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/win32-x64.zip",
+    ))
+
+    dest("temp")
+}
+
+task("unzipLs", type = Copy::class) {
+    dependsOn("downloadLs")
+    from(zipTree("temp/win32-x64.zip")) {
+        into("windows/x64")
+    }
+    from(zipTree("temp/darwin-x64.zip")) {
+        into("mac/x64")
+    }
+    from(zipTree("temp/darwin-arm64.zip")) {
+        into("mac/arm64")
+    }
+    from(zipTree("temp/linux-x64.zip")) {
+        into("linux")
+    }
+    destinationDir = file("temp")
+}
+
+task("installLs", type = Copy::class) {
+    dependsOn("unzipLs")
+    from("temp/windows/x64/") {
+        include("unity.exe")
+        into("win/x64")
+    }
+    from("temp/linux/") {
+        include("unity")
+        into("linux/x64")
+    }
+    from("temp/mac/x64") {
+        include("unity")
+        into("mac/x64")
+    }
+    from("temp/mac/arm64") {
+        include("unity")
+        into("mac/arm64")
+    }
+    destinationDir = file("src/main/resources/unity")
 }
 
 tasks {
@@ -48,5 +104,18 @@ tasks {
 
     publishPlugin {
         token.set(System.getenv("PUBLISH_TOKEN"))
+    }
+
+    buildPlugin {
+        dependsOn("installLs")
+    }
+
+    withType<org.jetbrains.intellij.tasks.PrepareSandboxTask> {
+        doLast {
+            copy {
+                from("src/main/resources/unity")
+                into("$destinationDir/${pluginName.get()}/unity")
+            }
+        }
     }
 }

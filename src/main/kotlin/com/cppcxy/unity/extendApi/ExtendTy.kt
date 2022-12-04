@@ -1,9 +1,8 @@
 package com.cppcxy.unity.extendApi
 
-import com.intellij.ide.util.PsiNavigationSupport
+import com.intellij.openapi.fileEditor.OpenFileDescriptor
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.LocalFileSystem
-import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiManager
 import com.intellij.psi.PsiNamedElement
@@ -16,14 +15,28 @@ import com.tang.intellij.lua.psi.Visibility
 import com.tang.intellij.lua.search.SearchContext
 import com.tang.intellij.lua.ty.*
 
+interface CanNavigate : ExtendApiBase {
+    fun canNav() = getLocation().startsWith("file:///")
+    fun navigate(project: Project, requestFocus: Boolean) {
+        val loc = getLocation().substring(8).split('#') // file:///
+        val path = loc[0]
+        val line = loc[1].toInt() - 1;
+        val file = LocalFileSystem.getInstance().findFileByPath(path)
+        if (file != null) {
+            val navigate = OpenFileDescriptor(project, file, line, 0);
+            navigate.navigate(requestFocus)
+        }
+    }
+}
+
 class ExtendClassMember(
-    val fieldName: String,
-    val type: ITy,
-    val parent: ExtendClass,
-    private val comment: String,
-    private val location: String,
-    mg: PsiManager
-) : LightElement(mg, LuaLanguage.INSTANCE), PsiNamedElement, LuaClassField, ExtendApiBase {
+        val fieldName: String,
+        val type: ITy,
+        val parent: ExtendClass,
+        private val comment: String,
+        private val location: String,
+        mg: PsiManager
+) : LightElement(mg, LuaLanguage.INSTANCE), PsiNamedElement, LuaClassField, CanNavigate {
     override fun getComment(): String {
         return comment
     }
@@ -50,17 +63,10 @@ class ExtendClassMember(
         return parent.type
     }
 
-    override fun canNavigateToSource(): Boolean = true
+    override fun canNavigate(): Boolean = canNav()
 
     override fun navigate(requestFocus: Boolean) {
-        val loc = location.substring(8).split('#') // file:///
-        val path = loc[0]
-        val offset = loc[1].toInt()
-        val file = LocalFileSystem.getInstance().findFileByPath(path)
-        if (file != null) {
-            val navigate = PsiNavigationSupport.getInstance().createNavigatable(project, file, offset)
-            navigate.navigate(true)
-        }
+        return navigate(project, requestFocus)
     }
 
     override val visibility: Visibility
@@ -72,9 +78,9 @@ class ExtendClassMember(
 }
 
 class TyExtendClass(val clazz: ExtendClass) : TyClass(
-    clazz.fullName,
-    clazz.name,
-    clazz.baseClassName,
+        clazz.fullName,
+        clazz.name,
+        clazz.baseClassName,
 ) {
     override fun findMemberType(name: String, searchContext: SearchContext): ITy? {
         return clazz.findMember(name)?.guessType(searchContext)
@@ -97,14 +103,14 @@ class TyExtendClass(val clazz: ExtendClass) : TyClass(
 }
 
 class ExtendClass(
-    className: String,
-    val fullName: String,
-    val baseClassName: String?,
-    parent: Namespace?,
-    private val comment: String,
-    private val location: String,
-    private val attribute: String,
-    mg: PsiManager
+        className: String,
+        val fullName: String,
+        val baseClassName: String?,
+        parent: Namespace?,
+        private val comment: String,
+        private val location: String,
+        private val attribute: String,
+        mg: PsiManager
 ) : NsMember(className, parent, mg) {
 
     private val ty: ITyClass by lazy { TyExtendClass(this) }
@@ -138,19 +144,6 @@ class ExtendClass(
         return methods[name]
     }
 
-    override fun canNavigateToSource(): Boolean = true
-
-    override fun navigate(requestFocus: Boolean) {
-        val loc = location.substring(8).split('#') // file:///
-        val path = loc[0]
-        val offset = loc[1].toInt()
-        val file = LocalFileSystem.getInstance().findFileByPath(path)
-        if (file != null) {
-            val navigate = PsiNavigationSupport.getInstance().createNavigatable(project, file, offset)
-            navigate.navigate(true)
-        }
-    }
-
     val isEnum: Boolean
         get() = attribute == "enum"
 
@@ -171,10 +164,10 @@ class ExtendClass(
 }
 
 abstract class NsMember(
-    val memberName: String,
-    val parent: Namespace?,
-    mg: PsiManager
-) : LightElement(mg, LuaLanguage.INSTANCE), PsiNamedElement, LuaClass, LuaClassField, ExtendApiBase {
+        val memberName: String,
+        val parent: Namespace?,
+        mg: PsiManager
+) : LightElement(mg, LuaLanguage.INSTANCE), PsiNamedElement, LuaClass, LuaClassField, CanNavigate {
 
     val members = mutableListOf<LuaClassMember>()
 
@@ -202,6 +195,12 @@ abstract class NsMember(
         return members.firstOrNull { it.name == name }
     }
 
+    override fun canNavigateToSource(): Boolean = canNav()
+
+    override fun navigate(requestFocus: Boolean) {
+        return navigate(project, requestFocus)
+    }
+
     override val visibility: Visibility
         get() = Visibility.PUBLIC
     override val isDeprecated: Boolean
@@ -222,10 +221,10 @@ private class NamespaceType(val namespace: Namespace) : TyClass(namespace.fullNa
 }
 
 class Namespace(
-    val typeName: String,
-    parent: Namespace?,
-    mg: PsiManager,
-    val isValidate: Boolean
+        val typeName: String,
+        parent: Namespace?,
+        mg: PsiManager,
+        val isValidate: Boolean
 ) : NsMember(typeName, parent, mg), LuaClass, LuaClassField {
 
     private val myType by lazy { NamespaceType(this) }
@@ -274,8 +273,8 @@ class Namespace(
 }
 
 class TyExtendFunction(
-    private val clazz: ExtendClass,
-    val name: String
+        private val clazz: ExtendClass,
+        val name: String
 ) : TyFunction() {
     override val mainSignature: IFunSignature
         get() {
