@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67c1dec7-e063-4104-b277-e5960e469b24" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnityRefresh.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnityLsAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnitySettings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnitySettings.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendApiService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendApiService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendShortNameManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendShortNameManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +70,8 @@
       <list>
         <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
+        <option value="Class" />
+        <option value="Action" />
       </list>
     </option>
   </component>
@@ -93,11 +102,12 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zc/Desktop/github/EmmyLua-Unity2/build/distributions/EmmyLua-Unity-1.0.0.zip&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zc/Desktop/github/EmmyLua-Unity/IDEA&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.18757194&quot;,
@@ -105,6 +115,14 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zc\Desktop\github\EmmyLua-Unity2\src\main\kotlin\com\cppcxy\unity\" />
+    </key>
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.cppcxy.unity" />
+    </key>
+  </component>
   <component name="RunManager" selected="Gradle.EmmyLuaUnity2 [buildPlugin]">
     <configuration name="EmmyLuaUnity2 [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -198,7 +216,12 @@
       <workItem from="1670135239398" duration="433000" />
       <workItem from="1670135685639" duration="683000" />
       <workItem from="1670136386740" duration="7000" />
-      <workItem from="1670136579092" duration="9000" />
+      <workItem from="1670136579092" duration="720000" />
+      <workItem from="1670142915689" duration="5864000" />
+      <workItem from="1670150916371" duration="3982000" />
+      <workItem from="1670156951521" duration="80000" />
+      <workItem from="1670157044691" duration="2343000" />
+      <workItem from="1670160125140" duration="123000" />
     </task>
     <servers />
   </component>
@@ -212,11 +235,6 @@
           <url>dummy://kotlinDecompiled/LuaDocumentationProvider.decompiled.java</url>
           <line>118</line>
           <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendShortNameManager.kt</url>
-          <line>34</line>
-          <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -25,12 +25,24 @@
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
-<!--    <extensions defaultExtensionNs="com.intellij">-->
-<!--        <psi.referenceContributor language="Lua" implementation="com.cppcxy.unity.UnityReferenceProvider"/>-->
-<!--    </extensions>-->
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService
+                serviceImplementation="com.cppcxy.unity.UnitySettings"/>
+        <applicationConfigurable instance="com.cppcxy.unity.UnitySettingsPanel"
+                                 displayName="Unity Settings"
+                                 id="preferences.UnitySettings2"
+                                 parentId="preferences.Lua">
+        </applicationConfigurable>
+    </extensions>
 
     <extensions defaultExtensionNs="com.tang.intellij.lua">
         <luaTypeInfer implementation="com.cppcxy.unity.UnityTypeInfer"/>
         <luaShortNamesManager implementation="com.cppcxy.unity.extendApi.ExtendShortNameManager" id="unity"/>
     </extensions>
+    <actions>
+        <action id="emmylua.unity.refresh" class="com.cppcxy.unity.UnityRefresh" text="Refresh Unity Api"
+                description="Refresh Unity Api">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>

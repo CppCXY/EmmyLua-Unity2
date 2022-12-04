@@ -1,5 +1,6 @@
 package com.cppcxy.unity.extendApi
 
+import com.cppcxy.unity.UnityLsAdapter
 import com.cppcxy.unity.UnitySettings
 import com.google.gson.Gson
 import com.intellij.execution.configurations.GeneralCommandLine
@@ -25,56 +26,11 @@ import java.nio.charset.StandardCharsets
 class ExtendShortNameManager : LuaShortNamesManager(), ProjectManagerListener {
 
     init {
-        loadUnityProject()
+        UnityLsAdapter.loadUnityProject()
     }
 
     val project: Project
         get() = ProjectManager.getInstance().openProjects.first()
-
-    private fun loadUnityProject() {
-        val workspaceDir = File(project.basePath)
-        if (workspaceDir.isDirectory) {
-            val slnFiles = workspaceDir.listFiles { it ->
-                it.extension == "sln"
-            }
-            if (slnFiles.isNotEmpty()) {
-                val slnFile = slnFiles.first()
-                UnitySettings.resolveUnityLs {
-                    val commandLine = GeneralCommandLine()
-                        .withExePath(it)
-                        .withParameters(
-                            slnFile.path,
-                            UnitySettings.unityNs.joinToString(";")
-                        )
-
-                    ProgressManager.getInstance().run(object : Task.Backgroundable(project, "load unity api ...") {
-                        override fun run(indicator: ProgressIndicator) {
-                            indicator.fraction = 0.5 // halfway done
-                            indicator.text = "unity api loading..."
-
-                            val handler = OSProcessHandler(commandLine.withCharset(StandardCharsets.UTF_8))
-                            handler.addProcessListener(object : CapturingProcessAdapter() {
-                                override fun processTerminated(event: ProcessEvent) {
-                                    val exitCode: Int = event.exitCode
-                                    if (exitCode == 0) {
-                                        val out = output.stdout
-                                        val params = Gson().fromJson(out, LuaReportApiParams::class.java)
-                                        ExtendApiService.loadApi(project, params)
-                                        indicator.fraction = 1.0 // halfway done
-                                        indicator.text = "unity api loaded"
-                                    } else {
-                                        indicator.text = output.stderr
-                                        indicator.stop()
-                                    }
-                                }
-                            })
-                            handler.startNotify()
-                        }
-                    })
-                }
-            }
-        }
-    }
 
 
     private fun findClass(name: String): NsMember? {

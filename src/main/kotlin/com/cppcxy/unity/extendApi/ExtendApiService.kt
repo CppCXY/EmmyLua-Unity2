@@ -1,5 +1,7 @@
 package com.cppcxy.unity.extendApi
 
+import com.cppcxy.unity.UnityLuaFramework
+import com.cppcxy.unity.UnitySettings
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiManager
 import com.tang.intellij.lua.psi.LuaClassMember
@@ -15,7 +17,9 @@ object ExtendApiService {
 
     fun loadApi(project: Project, api: LuaReportApiParams) {
         val mgr = PsiManager.getInstance(project)
-        rootNamespaceName = api.root.ifEmpty {
+        rootNamespaceName = if (UnitySettings.getInstance().framework == UnityLuaFramework.XLua) {
+            "CS"
+        } else {
             "_G"
         }
         rootNamespace = Namespace(api.root, null, mgr, false)
