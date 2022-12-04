@@ -32,51 +32,51 @@ intellij {
     plugins.set(listOf("com.tang:1.3.7.2-IDEA222"))
 }
 
-task("downloadLs", type = Download::class) {
-    src(arrayOf(
-            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-arm64.zip",
-            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-x64.zip",
-            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/linux-x64.zip",
-            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/win32-x64.zip",
-    ))
-
-    dest("temp")
-}
+//task("downloadLs", type = Download::class) {
+//    src(arrayOf(
+//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-arm64.zip",
+//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-x64.zip",
+//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/linux-x64.zip",
+//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/win32-x64.zip",
+//    ))
+//
+//    dest("temp")
+//}
 
 task("unzipLs", type = Copy::class) {
-    dependsOn("downloadLs")
+//    dependsOn("downloadLs")
     from(zipTree("temp/win32-x64.zip")) {
-        into("windows/x64")
+        into("bin")
     }
     from(zipTree("temp/darwin-x64.zip")) {
-        into("mac/x64")
+        into("bin")
     }
     from(zipTree("temp/darwin-arm64.zip")) {
-        into("mac/arm64")
+        into("bin")
     }
     from(zipTree("temp/linux-x64.zip")) {
-        into("linux")
+        into("bin")
     }
     destinationDir = file("temp")
 }
 
 task("installLs", type = Copy::class) {
     dependsOn("unzipLs")
-    from("temp/windows/x64/") {
+    from("temp/bin/win32-x64/") {
         include("unity.exe")
-        into("win/x64")
+        into("bin/win32-x64/")
     }
-    from("temp/linux/") {
+    from("temp/bin/linux-x64/") {
         include("unity")
-        into("linux/x64")
+        into("bin/linux-x64/")
     }
-    from("temp/mac/x64") {
+    from("temp/bin/darwin-x64/") {
         include("unity")
-        into("mac/x64")
+        into("bin/darwin-x64/")
     }
-    from("temp/mac/arm64") {
+    from("temp/bin/darwin-arm64/") {
         include("unity")
-        into("mac/arm64")
+        into("bin/darwin-arm64/")
     }
     destinationDir = file("src/main/resources/unity")
 }

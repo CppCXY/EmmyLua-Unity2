@@ -16,30 +16,16 @@ import java.nio.file.Paths
 
 object UnitySettings {
     private val pluginSource: String?
-        get() = PluginManagerCore.getPlugin(PluginId.getId("com.cppcxy.emmylua.unity"))?.pluginPath?.toAbsolutePath().toString()
+        get() = PluginManagerCore.getPlugin(PluginId.getId("com.cppcxy.emmylua.unity"))?.path?.path
 
 
-    private val unityLs: String
-        get() {
-            val base = "$pluginSource/unity"
+    private val unityLs: String = "$pluginSource/unity/bin/$unityLsInZip"
 
-            return if (SystemInfoRt.isWindows) {
-                "$base/win/x64/unity.exe"
-            } else if (SystemInfoRt.isMac) {
-                if (System.getProperty("os.arch") == "arm64") {
-                    "$base/mac/arm64/unity"
-                } else {
-                    "$base/mac/x64/unity"
-                }
-            } else {
-                "$base/linux/x64/unity"
-            }
-        }
 
     private val unityLsInZip: String
         get() {
             return if (SystemInfoRt.isWindows) {
-                "win32-64/unity.exe"
+                "win32-x64/unity.exe"
             } else if (SystemInfoRt.isMac) {
                 if (System.getProperty("os.arch") == "arm64") {
                     "darwin-arm64/unity"
@@ -75,37 +61,38 @@ object UnitySettings {
 
     fun resolveUnityLs(code: (String) -> Unit) {
         val path = unityLs
-        if (path != null) {
-            val file = File(path)
-            if (file.exists()) {
-                code(path)
-            } else {
-                // deprecated
-                ProgressManager.getInstance().run(object : Task.Backgroundable(project, "download unity ls") {
-                    override fun run(indicator: ProgressIndicator) {
-                        indicator.fraction = 0.0
-                        indicator.text = "start download unity ls"
-                        val url = URL(unityLsUrl)
-                        url.openStream().use {
-                            indicator.fraction = 0.1
-                            indicator.text = "download unity ls ..."
-                            Files.copy(it, Paths.get("$pluginSource/temp.zip"))
-                        }
-                        indicator.fraction = 0.5 // halfway done
-                        indicator.text = "unzip ..."
-                        val zipFile = ZipFile("$pluginSource/temp.zip")
-                        val zipEntry = zipFile.getEntry(unityLsInZip)
-                        val inputStream = zipFile.getInputStream(zipEntry)
-                        var file = File(path)
-                        file.writeBytes(inputStream.readAllBytes())
-                        zipFile.close()
 
-                        code(path)
-                    }
-                })
-
-            }
+        val file = File(path)
+        if (file.exists()) {
+            code(path)
         }
+//            } else {
+//                // deprecated
+//                ProgressManager.getInstance().run(object : Task.Backgroundable(project, "download unity ls") {
+//                    override fun run(indicator: ProgressIndicator) {
+//                        indicator.fraction = 0.0
+//                        indicator.text = "start download unity ls"
+//                        val url = URL(unityLsUrl)
+//                        url.openStream().use {
+//                            indicator.fraction = 0.1
+//                            indicator.text = "download unity ls ..."
+//                            Files.copy(it, Paths.get("$pluginSource/temp.zip"))
+//                        }
+//                        indicator.fraction = 0.5 // halfway done
+//                        indicator.text = "unzip ..."
+//                        val zipFile = ZipFile("$pluginSource/temp.zip")
+//                        val zipEntry = zipFile.getEntry(unityLsInZip)
+//                        val inputStream = zipFile.getInputStream(zipEntry)
+//                        var file = File(path)
+//                        file.writeBytes(inputStream.readAllBytes())
+//                        zipFile.close()
+//
+//                        code(path)
+//                    }
+//                })
+//
+//            }
+        // }
     }
 
 }
