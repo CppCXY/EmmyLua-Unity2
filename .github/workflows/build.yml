@@ -27,7 +27,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build
-        run: 
+        run: |
           chmod 777 gradlew
           ./gradlew buildPlugin
 
