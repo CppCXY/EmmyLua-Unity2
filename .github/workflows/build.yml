@@ -27,7 +27,9 @@ jobs:
           distribution: 'temurin'
 
       - name: Build
-        run: ./gradlew buildPlugin
+        run: 
+          chmod 777 gradlew
+          ./gradlew buildPlugin
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3.1.0
