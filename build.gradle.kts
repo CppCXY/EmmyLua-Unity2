@@ -32,19 +32,19 @@ intellij {
     plugins.set(listOf("com.tang:1.3.7.2-IDEA222"))
 }
 
-//task("downloadLs", type = Download::class) {
-//    src(arrayOf(
-//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-arm64.zip",
-//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-x64.zip",
-//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/linux-x64.zip",
-//            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/win32-x64.zip",
-//    ))
-//
-//    dest("temp")
-//}
+task("downloadLs", type = Download::class) {
+    src(arrayOf(
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-arm64.zip",
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/darwin-x64.zip",
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/linux-x64.zip",
+            "${emmyluaUnityLsProjectUrl}/releases/download/${emmyluaUnityLsVersion}/win32-x64.zip",
+    ))
+
+    dest("temp")
+}
 
 task("unzipLs", type = Copy::class) {
-//    dependsOn("downloadLs")
+    dependsOn("downloadLs")
     from(zipTree("temp/win32-x64.zip")) {
         into("bin")
     }

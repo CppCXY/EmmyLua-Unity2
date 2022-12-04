@@ -7,7 +7,6 @@
     <list default="true" id="67c1dec7-e063-4104-b277-e5960e469b24" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnitySettings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnitySettings.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,6 +198,7 @@
       <workItem from="1670135239398" duration="433000" />
       <workItem from="1670135685639" duration="683000" />
       <workItem from="1670136386740" duration="7000" />
+      <workItem from="1670136579092" duration="9000" />
     </task>
     <servers />
   </component>
