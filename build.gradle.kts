@@ -4,14 +4,14 @@ import de.undercouch.gradle.tasks.download.*
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
-    id("org.jetbrains.intellij") version "1.9.0"
+    id("org.jetbrains.intellij") version "1.10.0"
     id("de.undercouch.download").version("5.3.0")
 }
 
 group = "com.cppcxy"
-version = "1.0.0"
+version = "1.1.0"
 
-val emmyluaUnityLsVersion = "1.1.0"
+val emmyluaUnityLsVersion = "1.2.4"
 val emmyluaUnityLsProjectUrl = "https://github.com/CppCXY/EmmyLua-Unity-LS"
 
 repositories {

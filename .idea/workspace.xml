@@ -78,6 +78,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2022.2/555a6f6a04f930e6d453e2630b1cb33ba5e490d5/ideaIC-2022.2-sources.jar!/com/intellij/ide/scratch/ScratchFileActions.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jetbrains.intellij.idea/ideaIC/2022.2/555a6f6a04f930e6d453e2630b1cb33ba5e490d5/ideaIC-2022.2-sources.jar!/com/intellij/openapi/fileEditor/OpenFileDescriptor.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.plugins/gradle-intellij-plugin/1.6.0/ca8a905bc17e09a0ce666e4da0c00b2ee2873d75/gradle-intellij-plugin-1.6.0-sources.jar!/org/jetbrains/intellij/IntelliJPluginExtension.kt" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.intellij.plugins/gradle-intellij-plugin/1.6.0/ca8a905bc17e09a0ce666e4da0c00b2ee2873d75/gradle-intellij-plugin-1.6.0-sources.jar!/org/jetbrains/intellij/tasks/RunIdeBase.kt" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/.gradle/caches/transforms-3/3745ad4d44f9356916f77fcbfbe4b2a6/transformed/unzipped-distribution/gradle-7.4.2/subprojects/base-services/src/main/java/org/gradle/internal/reflect/JavaMethod.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -143,6 +150,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="EmmyLuaUnity2 [buildSearchableOptions]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -164,6 +172,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <configuration name="EmmyLuaUnity2 [verifyPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -185,6 +194,7 @@
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
     <recent_temporary>
