@@ -26,6 +26,7 @@ public class UnitySettingsPanel implements SearchableConfigurable, Configurable.
         });
 
         framework.setModel(model);
+        framework.setSelectedItem(settings.getFramework());
         unityNamespace.setText(settings.getShowNamespace());
     }
 
@@ -51,6 +52,7 @@ public class UnitySettingsPanel implements SearchableConfigurable, Configurable.
 
     @Override
     public void apply() {
+        settings.setFramework((UnityLuaFramework) framework.getSelectedItem());
         settings.setUnityNamespace(Arrays.asList(unityNamespace.getText().split(";")));
         settings.fireChanged();
     }

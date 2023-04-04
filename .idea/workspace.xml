@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67c1dec7-e063-4104-b277-e5960e469b24" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnityRefresh.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnityLsAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnitySettings.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/UnitySettings.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendApiService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendApiService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendShortNameManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/cppcxy/unity/extendApi/ExtendShortNameManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cppcxy/unity/UnitySettingsPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +104,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zc/Desktop/github/EmmyLua-Unity/IDEA&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zc/Documents/Tencent Files/812125110/FileRecv/EmmyLua-AttachDebugger-1.0.9.zip&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -130,7 +125,28 @@
       <recent name="com.cppcxy.unity" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.EmmyLuaUnity2 [buildPlugin]">
+  <component name="RunManager" selected="Gradle.Run Plugin">
+    <configuration name="EmmyLua-Unity2 [prepareUiTestingSandbox]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="prepareUiTestingSandbox" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="EmmyLuaUnity2 [buildPlugin]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -199,6 +215,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.EmmyLua-Unity2 [prepareUiTestingSandbox]" />
         <item itemvalue="Gradle.EmmyLuaUnity2 [buildPlugin]" />
         <item itemvalue="Gradle.EmmyLuaUnity2 [buildSearchableOptions]" />
         <item itemvalue="Gradle.EmmyLuaUnity2 [verifyPlugin]" />
@@ -232,6 +249,8 @@
       <workItem from="1670156951521" duration="80000" />
       <workItem from="1670157044691" duration="2343000" />
       <workItem from="1670160125140" duration="123000" />
+      <workItem from="1670513729983" duration="103000" />
+      <workItem from="1671692612974" duration="864000" />
     </task>
     <servers />
   </component>
