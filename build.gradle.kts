@@ -9,9 +9,9 @@ plugins {
 }
 
 group = "com.cppcxy"
-version = "1.2.4"
+version = "1.3.1"
 
-val emmyluaUnityLsVersion = "1.2.4"
+val emmyluaUnityLsVersion = "1.3.1"
 val emmyluaUnityLsProjectUrl = "https://github.com/CppCXY/EmmyLua-Unity-LS"
 
 repositories {
@@ -93,7 +93,7 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("223")
-        untilBuild.set("231.*")
+        untilBuild.set("232.*")
     }
 
     signPlugin {
